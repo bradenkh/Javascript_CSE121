@@ -72,14 +72,17 @@ var temples = [];
 // - Appends the <h3> element, the two <h4> elements, and the <img> element to the <article> element as children
 // - Appends the <article> element to the HTML element with an ID of temples
 function output(myArray) {
+    console.log("running output");
     myArray.forEach((element) => {
-        console.log("hello");
         var thisTemple = document.createElement("article");
         var templeName = document.createElement("h3");
         templeName.innerText = element.templeName;
-        var location = document.createElement("h4").innerText = element.location;
-        var dedicated = document.createElement("h4").innerText = element.dedicated;
-        var img = document.createElement("h3").setAttribute("src") = element.imageUrl;
+        var location = document.createElement("h4");
+        location.innerText = element.location;
+        var dedicated = document.createElement("h4");
+        dedicated.innerText = element.dedicated;
+        var img = document.createElement("img");
+        img.setAttribute("src", element.imageUrl);
         thisTemple.appendChild(templeName);
         thisTemple.append(location);
         thisTemple.append(dedicated);
@@ -93,24 +96,30 @@ function output(myArray) {
 // Step 4: Add a .then() method to turn the returned string into a JavaScript object ( hint: .json() )
 // Step 5: Add another .then() method with a variable name to hold the temples and an empty arrow function
 // Step 6: Inside of second .then() method, assign the list of temples (as a JSON object) to the temples variable
+// Step 7: Finally, call the output function and pass it the list of temples
 fetch("https://byui-cse.github.io/cse121b-course/week05/temples.json")
     .then(response => response.json())
     .then(data => {
+        console.log("running fetch");
         data.forEach(element => {
             temples.push(element);
         });
+        output(temples);
     });
 
-// Step 7: Finally, call the output function and pass it the list of temples
-console.log(typeof(temples));
-output(temples);
+
 
 // Step 8: Declare a function named reset that clears all of the <article> elements from the HTML element with an ID of temples
+function reset() {
+  var articles = document.querySelectorAll("#temples");
+  articles.forEach(item => {item.innerHTML = "";});
+}
 
 // Step 9: Declare a function named sortBy that does the following:
 // - Calls the reset function
 // - Sorts the global temple list by the currently selected value of the HTML element with an ID of sortBy
 // - Calls the output function passing in the sorted list of temples
+
 
 // Step 10: Add a change event listener to the HTML element with an ID of sortBy that calls the sortBy function
 
