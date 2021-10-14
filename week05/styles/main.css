@@ -1,6 +1,8 @@
 /* HTML Selectors */
 article {
-    margin: 10px;
+    padding: 10px;
+    border: solid;
+    border-width: 1px;
 }
 
 body {
